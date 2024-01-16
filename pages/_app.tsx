@@ -1,5 +1,5 @@
 import type { AppProps } from "next/app";
-import { ThirdwebProvider, smartWallet, metamaskWallet, coinbaseWallet, embeddedWallet } from "@thirdweb-dev/react";
+import { ThirdwebProvider, smartWallet, metamaskWallet, coinbaseWallet, embeddedWallet, magicLink } from "@thirdweb-dev/react";
 import "../styles/globals.css";
 import { ACCOUNT_FACTORY_ADDRESS, NFT_CONTRACT_ADDRESS, LIGHT_ACCOUNT_FACTORY } from "../constants/addresses";
 
@@ -14,6 +14,8 @@ const smartWalletConfig = {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const magicApiKey = process.env.MAGIC_PUBLISHABLE_KEY || ""; // Provide a default value if undefined
+
   return (
     <ThirdwebProvider
       clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
@@ -21,9 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       supportedWallets={[
         smartWallet(embeddedWallet(), smartWalletConfig),
         smartWallet(metamaskWallet(), smartWalletConfig),
-        smartWallet(coinbaseWallet(), smartWalletConfig),
+        smartWallet(magicLink({ apiKey: magicApiKey }), smartWalletConfig),
       ]}
-      >
+    >
       <Component {...pageProps} />
     </ThirdwebProvider>
   );

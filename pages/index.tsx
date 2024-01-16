@@ -1,8 +1,12 @@
-import { ConnectWallet, Web3Button } from "@thirdweb-dev/react";
+import { ConnectWallet, Transaction, Web3Button } from "@thirdweb-dev/react";
 import styles from "../styles/Home.module.css";
 import { NextPage } from "next";
-import { NFT_CONTRACT_ADDRESS } from "../constants/addresses";
 import { NFTClaimButton } from "../components/NFTClaimButton";
+import { TransactionForm } from "../components/TransactionForm";
+import { ERC20TokenBalance } from "../components/ERC20TokenBalance";
+import { NativeBalance } from "../components/NativeBalance";
+import { NFTBalance } from "../components/NFTBalance";
+import { ExecuteContractWrite } from "../components/ExecuteContractWrite";
 
 
 const Home: NextPage = () => {
@@ -17,7 +21,12 @@ const Home: NextPage = () => {
                 align: "center",
               }}
             />
-            <NFTClaimButton /> {/* New component */}
+            <NFTClaimButton />
+            <TransactionForm />
+            <ERC20TokenBalance />
+            <NativeBalance />
+            <NFTBalance />
+            <ExecuteContractWrite />
           </div>
         </div>
       </div>
